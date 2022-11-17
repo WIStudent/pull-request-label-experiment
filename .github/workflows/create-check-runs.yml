@@ -11,33 +11,76 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: LouisBrunner/checks-action@v1.5.0
+      - uses: actions/github-script@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: test:a
-          conclusion: neutral
-          action_url: https://tobiastrumm.de # just a placeholder
-          actions: |
-            [{
-              "label": "Run test:a",
-              "description": "Run test:a",
-              "identifier": "test:a"
-            }]
-          output: |
-            {"summary": "test:a not started yet"}
+          script: |
+            await github.rest.checks.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head_sha: context.sha,
+              name: "my-check-name",
+              conclusion: "neutral",
+              output: {
+                title: "test:a",
+                summary: "test:a not started yet"
+              },
+              actions: [
+                {
+                  label: "Run test:a",
+                  description: "Run test:a",
+                  identifier: "test:a"
+                }
+              ]
+            });
 
-      - uses: LouisBrunner/checks-action@v1.5.0
+      - uses: actions/github-script@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: test:b
-          conclusion: neutral
-          action_url: https://tobiastrumm.de # just a placeholder
-          actions: |
-            [{
-              "label": "Run test:b",
-              "description": "Run test:b",
-              "identifier": "test:b"
-            }]
-          output: |
-            {"summary": "test:b not started yet"}
+          script: |
+            await github.rest.checks.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head_sha: context.sha,
+              name: "my-check-name",
+              conclusion: "neutral",
+              output: {
+                title: "test:b",
+                summary: "test:b not started yet"
+              },
+              actions: [
+                {
+                  label: "Run test:b",
+                  description: "Run test:b",
+                  identifier: "test:b"
+                }
+              ]
+            });
+      # - uses: LouisBrunner/checks-action@v1.5.0
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     name: test:a
+      #     conclusion: neutral
+      #     action_url: https://tobiastrumm.de # just a placeholder
+      #     actions: |
+      #       [{
+      #         "label": "Run test:a",
+      #         "description": "Run test:a",
+      #         "identifier": "test:a"
+      #       }]
+      #     output: |
+      #       {"summary": "test:a not started yet"}
+
+      # - uses: LouisBrunner/checks-action@v1.5.0
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     name: test:b
+      #     conclusion: neutral
+      #     action_url: https://tobiastrumm.de # just a placeholder
+      #     actions: |
+      #       [{
+      #         "label": "Run test:b",
+      #         "description": "Run test:b",
+      #         "identifier": "test:b"
+      #       }]
+      #     output: |
+      #       {"summary": "test:b not started yet"}
   
