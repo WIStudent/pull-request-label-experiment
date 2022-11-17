@@ -1,0 +1,12 @@
+name: Check run action handler
+
+on:
+  check_run:
+    types:
+      - requested_action
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    steps:
+      - echo "${{ toJSON(github.event) }}"
