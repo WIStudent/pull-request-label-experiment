@@ -15,7 +15,7 @@ jobs:
         id: test-a
         with:
           script: |
-            await github.rest.checks.create({
+            const result = await github.rest.checks.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               head_sha: context.payload.pull_request.head.sha,
@@ -33,6 +33,9 @@ jobs:
                 }
               ]
             });
+            return result;
+
+      - run: echo '${{ steps.test-a.outputs.result }}'
 
       - uses: actions/github-script@v6
         with:
