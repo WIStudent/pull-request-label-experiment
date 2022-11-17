@@ -1,0 +1,27 @@
+name: Create check run
+
+on:
+  pull_request: {}
+
+jobs:
+  create-runs:
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: LouisBrunner/checks-action@v1.5.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: test:a
+          conclusion: action_required
+          output: |
+            {"summary": "test:a not started yet"}
+      - uses: LouisBrunner/checks-action@v1.5.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: test:b
+          conclusion: action_required
+          output: |
+            {"summary": "test:b not started yet"}
+  
