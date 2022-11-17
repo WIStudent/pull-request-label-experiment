@@ -10,20 +10,34 @@ jobs:
       checks: write
     steps:
       - uses: actions/checkout@v3
+
       - uses: LouisBrunner/checks-action@v1.5.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: test:a
           conclusion: action_required
           action_url: https://tobiastrumm.de # just a placeholder
+          actions: |
+            [{
+              "label": "Run test:a",
+              "description": "Run test:a",
+              "identifier": "test:a"
+            }]
           output: |
             {"summary": "test:a not started yet"}
+
       - uses: LouisBrunner/checks-action@v1.5.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: test:b
           conclusion: action_required
           action_url: https://tobiastrumm.de # just a placeholder
+          actions: |
+            [{
+              "label": "Run test:b",
+              "description": "Run test:b",
+              "identifier": "test:b"
+            }]
           output: |
             {"summary": "test:b not started yet"}
   
