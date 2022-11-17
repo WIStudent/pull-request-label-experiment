@@ -15,7 +15,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: test:a
-          conclusion: action_required
+          conclusion: neutral
           action_url: https://tobiastrumm.de # just a placeholder
           actions: |
             [{
@@ -30,7 +30,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: test:b
-          conclusion: action_required
+          conclusion: neutral
           action_url: https://tobiastrumm.de # just a placeholder
           actions: |
             [{
