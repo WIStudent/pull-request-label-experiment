@@ -14,7 +14,6 @@ jobs:
       - uses: actions/github-script@v6
         id: test-a
         with:
-          github-token: ${{ secrets.MY_PAT }}
           script: |
             const result = await github.rest.checks.create({
               owner: context.repo.owner,
@@ -40,7 +39,6 @@ jobs:
 
       - uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.MY_PAT }}
           script: |
             await github.rest.checks.create({
               owner: context.repo.owner,
