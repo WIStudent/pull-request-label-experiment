@@ -19,7 +19,7 @@ jobs:
             const result = await github.rest.checks.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              head_sha: context.sha,
+              head_sha: context.payload.pull_request.head.sha,
               name: "my-check-name",
               status: "completed",
               conclusion: "success",
@@ -38,8 +38,6 @@ jobs:
             });
             return result;
 
-      - run: echo "${{ steps.my-check.outputs.result }}"
-
       - uses: actions/github-script@v6
         id: test-a
         with:
@@ -47,7 +45,7 @@ jobs:
             await github.rest.checks.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              head_sha: context.sha,
+              head_sha: context.payload.pull_request.head.sha,
               name: "my-check-name",
               conclusion: "neutral",
               output: {
@@ -71,7 +69,7 @@ jobs:
             await github.rest.checks.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              head_sha: context.sha,
+              head_sha: context.payload.pull_request.head.sha,
               name: "my-check-name",
               conclusion: "neutral",
               output: {
