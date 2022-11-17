@@ -7,8 +7,7 @@ on:
       - completed
       - requested_action
 
-permissions:
-  checks: write
+permissions: read-all
 
 jobs:
   run-test:
