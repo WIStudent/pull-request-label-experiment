@@ -13,7 +13,7 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - uses: uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - run: gh pr edit ${{ github.event.pull_request.number }} --remove-label ${{ github.event.label.name }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
