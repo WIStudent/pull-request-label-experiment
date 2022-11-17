@@ -13,6 +13,7 @@ jobs:
 
       - uses: actions/github-script@v6
         with:
+          debug: true
           script: |
             await github.rest.checks.create({
               owner: context.repo.owner,
@@ -35,6 +36,7 @@ jobs:
 
       - uses: actions/github-script@v6
         with:
+          debug: true
           script: |
             await github.rest.checks.create({
               owner: context.repo.owner,
@@ -54,6 +56,7 @@ jobs:
                 }
               ]
             });
+
       # - uses: LouisBrunner/checks-action@v1.5.0
       #   with:
       #     token: ${{ secrets.GITHUB_TOKEN }}
