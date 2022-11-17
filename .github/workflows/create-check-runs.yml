@@ -12,6 +12,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - uses: actions/github-script@v6
+        id: test-a
         with:
           debug: true
           script: |
@@ -33,6 +34,8 @@ jobs:
                 }
               ]
             });
+
+      - run: echo "${{ steps.test-a.outputs.result }}"
 
       - uses: actions/github-script@v6
         with:
