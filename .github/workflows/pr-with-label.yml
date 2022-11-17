@@ -9,6 +9,7 @@ on:
 jobs:
   run-on-pr:
     if: ${{ (github.event.label.name == 'test:a') || (github.event.label.name == 'test:b') }}
+    name: Run on PR (${{ github.event.label.name }})
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
