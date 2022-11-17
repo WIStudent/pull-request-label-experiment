@@ -11,10 +11,37 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: "Create a check run"
+        uses: actions/github-script@v6
+        id: my-check
+        with:
+          script: |
+            await github.rest.checks.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head_sha: context.sha,
+              name: "my-check-name",
+              status: "completed",
+              conclusion: "success",
+              output: {
+                title: "my *check* title",
+                summary: "my *check* summary",
+                text: "my *check* text,
+              },
+              actions: [
+                {
+                  label: "My Check Action",
+                  description: "My check action description.",
+                  identifier: "my-check-action",
+                },
+              ],
+            });
+
+      - run: echo "${{ steps.my-check.outputs.result }}"
+
       - uses: actions/github-script@v6
         id: test-a
         with:
-          debug: true
           script: |
             await github.rest.checks.create({
               owner: context.repo.owner,
@@ -39,7 +66,6 @@ jobs:
 
       - uses: actions/github-script@v6
         with:
-          debug: true
           script: |
             await github.rest.checks.create({
               owner: context.repo.owner,
