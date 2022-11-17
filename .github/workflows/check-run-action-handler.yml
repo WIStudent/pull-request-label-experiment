@@ -3,6 +3,8 @@ name: Check run action handler
 on:
   check_run:
     types:
+      - created
+      - completed
       - requested_action
 
 permissions:
