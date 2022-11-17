@@ -1,6 +1,11 @@
 name: PR with label
 run-name: PR with label ${{ github.event.label.name }}
 
+on:
+  pull-request:
+    types:
+      - labeled
+
 jobs:
   run-on-pr:
     if: ${{ (github.event.label.name == 'test:a') || (github.event.label.name == 'test:b') }}
