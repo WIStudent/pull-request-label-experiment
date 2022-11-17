@@ -16,7 +16,7 @@ jobs:
         id: my-check
         with:
           script: |
-            await github.rest.checks.create({
+            const result = await github.rest.checks.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               head_sha: context.sha,
@@ -36,6 +36,7 @@ jobs:
                 }
               ]
             });
+            return result;
 
       - run: echo "${{ steps.my-check.outputs.result }}"
 
