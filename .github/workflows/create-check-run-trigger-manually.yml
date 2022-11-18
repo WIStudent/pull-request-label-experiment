@@ -1,0 +1,31 @@
+name: Create check run, trigger manually
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  create_check_run:
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/github-script@v6
+        id: manual-check
+        with:
+          script: |
+            const result = await github.rest.checks.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head_sha: context.sha,
+              name: "manual-check",
+              conclusion: "neutral",
+              output: {
+                title: "manual-check",
+                summary: "manual-check not started yet"
+              }
+            });
+            return result;
+
+      - run: echo '${{ steps.manual-check.outputs.result }}'
