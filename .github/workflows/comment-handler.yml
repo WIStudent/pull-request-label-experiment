@@ -15,4 +15,4 @@ jobs:
         with:
           script: |
             const issueNumber = context.payload.issue.number;
-            console.log(JSON.stringify(context.payload.issue.pull_request));
+            console.log(JSON.stringify(context.payload.issue));
