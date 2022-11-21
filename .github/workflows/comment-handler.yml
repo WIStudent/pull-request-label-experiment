@@ -14,9 +14,16 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            const pull = await github.rest.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
+            const {owner, repo} = context.repo;
+            const {data: {head: {ref}}} = await github.rest.pulls.get({
+              owner,
+              repo,
               pull_number: context.payload.issue.number
             });
-            console.log(JSON.stringify(pull));
+            console.log(ref);
+            await github.rest.actions.createWorkflowDispatch({
+              owner,
+              repo,
+              workflow_id: "create-check-run-trigger-manually.yml",
+              ref
+            });
