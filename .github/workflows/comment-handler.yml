@@ -20,7 +20,12 @@ jobs:
               repo,
               pull_number: context.payload.issue.number
             });
-            console.log(ref);
+            await github.rest.reactions.createForIssueComment({
+              owner,
+              repo,
+              comment_id: context.payload.comment.id,
+              content: "+1"
+            });
             await github.rest.actions.createWorkflowDispatch({
               owner,
               repo,
